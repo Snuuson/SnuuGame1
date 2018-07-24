@@ -6,8 +6,8 @@ class Brick
 {
 public:
 	Brick();
-	Brick(const RectF rect, Color c);
-
+	Brick(const RectF rect_in, Color c_in);
+	
 	~Brick();
 private:
 	Color c;
