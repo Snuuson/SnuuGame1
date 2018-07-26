@@ -7,10 +7,10 @@ class Brick
 public:
 	Brick();
 	Brick(const RectF rect_in, Color c_in);
-	
+	void Draw( Graphics& gfx) const;
 	~Brick();
 private:
-	Color c;
+	Color color;
 	RectF rect;
 
 };

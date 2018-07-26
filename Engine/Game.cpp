@@ -20,12 +20,18 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "Brick.h"
+#include "Ball.h"
+#include "FrameTimer.h"
 
-Game::Game( MainWindow& wnd )
+Game::Game(MainWindow& wnd)
 	:
-	wnd( wnd ),
-	gfx( wnd )
-	//test
+	wnd(wnd),
+	gfx(wnd),
+	ball(Vec2(300.0f, 300.0f), Vec2(100.0f, 100.0f)),
+	walls(0.0f,float(gfx.ScreenWidth),0.0f,float(gfx.ScreenHeight))
+	
+	
 {
 }
 
@@ -39,8 +45,13 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	float dt = ft.Mark();
+	ball.Update(dt);
+	ball.DoWallCollision(walls);
+
 }
 
 void Game::ComposeFrame()
 {
+	ball.Draw(gfx);
 }
