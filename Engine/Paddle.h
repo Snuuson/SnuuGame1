@@ -3,25 +3,26 @@
 #include "Ball.h"
 #include "RectF.h"
 #include "Colors.h"
+#include "Keyboard.h"
 
 class Paddle
 {
 public:
 	Paddle();
-	Paddle(Vec2& pos_in,Color c_in, float speed_in);
-	void Update(float dt);
+	Paddle(Vec2& pos_in,float halfWidth, float halfHeight);
+	void Update(Keyboard& kbd,float dt);
 	bool DoBallCollision(Ball & ball) const;
-	bool DoWallCollision(const RectF& walls);
+	void DoWallCollision(const RectF& walls);
 	void Draw(Graphics& gfx) const	;
-	RectF GetRect();
+	RectF GetRect() const;
 	~Paddle();
 
 private:
 	
 	Vec2 pos;
-	float speed;
+	float speed = 100;
 	float halfWidth;
 	float halfHeight;
-	Color c;
+	Color c = Colors::Green;
 };
 

@@ -6,34 +6,59 @@ Paddle::Paddle()
 {
 }
 
-Paddle::Paddle(Vec2 & pos_in, Color c_in, float speed_in)
+Paddle::Paddle(Vec2 & pos_in, float halfWidth_in, float halfHeight_in)
 	:
 	pos( pos_in),
-	c(c_in),
-	speed(speed_in)
+	halfWidth(halfWidth_in),
+	halfHeight(halfHeight_in)
 
 {
 
 }
 
-void Paddle::Update(float dt)
+void Paddle::Update(Keyboard& kbd, float dt)
 {
-	pos.y += speed * dt;
+	if (kbd.KeyIsPressed(VK_LEFT)) {
+		pos.x -= speed * dt;
+		}
+
+	if (kbd.KeyIsPressed(VK_RIGHT)) {
+			pos.x += speed * dt;
+		}
 }
 
+void Paddle::Draw(Graphics & gfx) const
+{
+	gfx.DrawRect(GetRect(), c);
+}
 
+RectF Paddle::GetRect() const
+{
+	return RectF::FromCenter(pos, halfHeight, halfWidth);
+}
 bool Paddle::DoBallCollision(Ball & ball) const
 {
 	RectF rect_b = ball.GetRekt();
 
-	if(GetRect().IsOverlappingWith(ball.GetRekt()))
+	if (GetRect().IsOverlappingWith(ball.GetRekt())) {
+		ball.ReboundY();
+		return true;
+	}
 	return false;
 }
 
-RectF Paddle::GetRect()
+void Paddle::DoWallCollision(const RectF & walls)
 {
-	return RectF::FromCenter(pos,halfHeight,halfWidth);
+	RectF rect = GetRect();
+	if (rect.left < walls.left) {
+		pos.x += walls.left - rect.left;
+	}else if (rect.right > walls.right) {
+		pos.x += walls.right - rect.right;
+	}
+	
 }
+
+
 
 Paddle::~Paddle()
 {
