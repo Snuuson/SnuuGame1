@@ -24,5 +24,6 @@ private:
 	float halfWidth;
 	float halfHeight;
 	Color c = Colors::Green;
+	float wingWidth = 10;
 };
 

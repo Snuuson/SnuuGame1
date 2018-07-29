@@ -30,6 +30,7 @@ void Paddle::Update(Keyboard& kbd, float dt)
 void Paddle::Draw(Graphics & gfx) const
 {
 	gfx.DrawRect(GetRect(), c);
+	gfx.DrawRect(RectF::FromCenter(pos,halfWidth-wingWidth,halfHeight), Colors::Cyan);
 }
 
 RectF Paddle::GetRect() const
@@ -40,7 +41,7 @@ bool Paddle::DoBallCollision(Ball & ball) const
 {
 	RectF rect_b = ball.GetRekt();
 
-	if (ball.GetVel().y > 0 && GetRect().IsOverlappingWith(ball.GetRekt())) {
+	if (ball.GetVel().y > 0 && GetRect().IsOverlappingWith(ball.GetRekt()) && ((ball.GetPos().y-(pos.y-halfHeight))>-5 && (ball.GetPos().y - (pos.y - halfHeight)<0))) {
 		ball.ReboundY();
 		return true;
 	}
