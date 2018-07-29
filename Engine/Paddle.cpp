@@ -34,13 +34,13 @@ void Paddle::Draw(Graphics & gfx) const
 
 RectF Paddle::GetRect() const
 {
-	return RectF::FromCenter(pos, halfHeight, halfWidth);
+	return RectF::FromCenter(pos, halfWidth, halfHeight);
 }
 bool Paddle::DoBallCollision(Ball & ball) const
 {
 	RectF rect_b = ball.GetRekt();
 
-	if (GetRect().IsOverlappingWith(ball.GetRekt())) {
+	if (ball.GetVel().y > 0 && GetRect().IsOverlappingWith(ball.GetRekt())) {
 		ball.ReboundY();
 		return true;
 	}

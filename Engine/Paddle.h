@@ -20,7 +20,7 @@ public:
 private:
 	
 	Vec2 pos;
-	float speed = 100;
+	float speed = 200;
 	float halfWidth;
 	float halfHeight;
 	Color c = Colors::Green;

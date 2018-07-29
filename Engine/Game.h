@@ -53,5 +53,7 @@ private:
 	Ball ball;
 	Brick brick;
 	RectF walls;
-	Sound soundpad;
+	Sound soundPad;
+	Sound soundBrick;
+
 };

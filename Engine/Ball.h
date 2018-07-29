@@ -14,6 +14,7 @@ public:
 	void ReboundX();
 	void ReboundY();
 	RectF GetRekt() const;
+	Vec2 GetVel() const;
 	~Ball();
 
 private:
