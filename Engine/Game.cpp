@@ -45,7 +45,7 @@ Game::Game(MainWindow& wnd)
 	
 	for (int y = 0; y < brickRowCount; y++) {
 		for (int x = 0; x < brickColumnCount; x++) {
-			bricks[c] = Brick(RectF(Vec2(x*brickWidth+i, y*brickHeight+l), brickWidth, brickHeight), Colors::Yellow);
+			bricks[c] = Brick(RectF(Vec2(x*brickWidth, y*brickHeight), brickWidth, brickHeight), Colors::Yellow);
 			i++;
 			c++;
 		}
