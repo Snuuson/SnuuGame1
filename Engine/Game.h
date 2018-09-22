@@ -51,7 +51,13 @@ private:
 	FrameTimer ft;
 	Paddle paddle;
 	Ball ball;
-	Brick brick;
+	
+	float brickHeight = 20.0f;
+	float brickWidth = 40.0f; 
+	int const static brickRowCount = 5;
+	int const static brickColumnCount = 19;
+	Brick bricks[brickRowCount*brickColumnCount];
+	Brick testBrick;
 	RectF walls;
 	Sound soundPad;
 	Sound soundBrick;

@@ -11,7 +11,7 @@ public:
 	Paddle();
 	Paddle(Vec2& pos_in,float halfWidth, float halfHeight);
 	void Update(Keyboard& kbd,float dt);
-	bool DoBallCollision(Ball & ball) const;
+	bool DoBallCollision(Ball & ball);
 	void DoWallCollision(const RectF& walls);
 	void Draw(Graphics& gfx) const	;
 	RectF GetRect() const;
@@ -19,11 +19,13 @@ public:
 
 private:
 	
+	const Color randomColor() const;
 	Vec2 pos;
 	float speed = 200;
 	float halfWidth;
 	float halfHeight;
-	Color c = Colors::Green;
+	Color coreColor = Colors::Green;
+	Color wingColor = Colors::Red;
 	float wingWidth = 10;
 };
 

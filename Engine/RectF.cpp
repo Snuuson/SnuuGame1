@@ -24,7 +24,7 @@ RectF::RectF(const Vec2 & topleft, const Vec2 & bottomRight)
 
 RectF::RectF(const Vec2 & topleft, float width, float height)
 	:
-	RectF(topleft,Vec2(topleft.x + height,topleft.y + width))
+	RectF(topleft,Vec2(topleft.x + width,topleft.y + height))
 {
 
 }
