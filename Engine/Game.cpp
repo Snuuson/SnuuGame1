@@ -41,11 +41,19 @@ Game::Game(MainWindow& wnd)
 	int i = 0;
 	int l = 0;
 	int c = 0;
-	
+	Color color = Colors::Red;
 	
 	for (int y = 0; y < brickRowCount; y++) {
 		for (int x = 0; x < brickColumnCount; x++) {
-			bricks[c] = Brick(RectF(Vec2(x*brickWidth, y*brickHeight), brickWidth, brickHeight), Colors::Yellow);
+			switch (y)
+			{
+			case 1:color = Colors::Cyan; break;
+			case 2:color = Colors::Blue; break;
+			case 3:color = Colors::Green; break;
+			case 4:color = Colors::Yellow; break;
+			default:break;
+			}
+			bricks[c] = Brick(RectF(Vec2(x*brickWidth+20, y*brickHeight+20), brickWidth, brickHeight), color);
 			i++;
 			c++;
 		}

@@ -21,7 +21,7 @@ private:
 	
 	const Color randomColor() const;
 	Vec2 pos;
-	float speed = 200;
+	float speed = 400;
 	float halfWidth;
 	float halfHeight;
 	Color coreColor = Colors::Green;
