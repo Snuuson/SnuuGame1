@@ -15,6 +15,7 @@ public:
 	void DoWallCollision(const RectF& walls);
 	void Draw(Graphics& gfx) const	;
 	RectF GetRect() const;
+	void ResetCooldown();
 	~Paddle();
 
 private:
@@ -26,6 +27,7 @@ private:
 	float halfHeight;
 	Color coreColor = Colors::Green;
 	Color wingColor = Colors::Red;
-	float wingWidth = 10;
+	float wingWidth = 20;
+	bool isCooldown = false;
 };
 

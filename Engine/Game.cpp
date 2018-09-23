@@ -1,5 +1,5 @@
-/****************************************************************************************** 
- *	Chili DirectX Framework Version 16.07.20											  *	
+/******************************************************************************************
+ *	Chili DirectX Framework Version 16.07.20											  *
  *	Game.cpp																			  *
  *	Copyright 2016 PlanetChili.net <http://www.planetchili.net>							  *
  *																						  *
@@ -11,7 +11,7 @@
  *	(at your option) any later version.													  *
  *																						  *
  *	The Chili DirectX Framework is distributed in the hope that it will be useful,		  *
- *	but WITHOUT ANY WARRANTY; without even the implied warranty of						  * 
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of						  *
  *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the						  *
  *	GNU General Public License for more details.										  *
  *																						  *
@@ -32,17 +32,17 @@ Game::Game(MainWindow& wnd)
 	walls(0.0f, float(gfx.ScreenWidth), 0.0f, float(gfx.ScreenHeight)),
 	soundPad(L"Sounds\\arkpad.wav"),
 	soundBrick(L"Sounds\\arkbrick.wav"),
-	paddle(Vec2(100, 500), 40, 20)
-	
-	
-	
-	
+	paddle(Vec2(100, 400), 60, 20)
+
+
+
+
 {
 	int i = 0;
 	int l = 0;
 	int c = 0;
 	Color color = Colors::Red;
-	
+
 	for (int y = 0; y < brickRowCount; y++) {
 		for (int x = 0; x < brickColumnCount; x++) {
 			switch (y)
@@ -53,7 +53,7 @@ Game::Game(MainWindow& wnd)
 			case 4:color = Colors::Yellow; break;
 			default:break;
 			}
-			bricks[c] = Brick(RectF(Vec2(x*brickWidth+20, y*brickHeight+20), brickWidth, brickHeight), color);
+			bricks[c] = Brick(RectF(Vec2(x*brickWidth + 20, y*brickHeight + 20), brickWidth, brickHeight), color);
 			i++;
 			c++;
 		}
@@ -64,7 +64,7 @@ Game::Game(MainWindow& wnd)
 
 void Game::Go()
 {
-	gfx.BeginFrame();	
+	gfx.BeginFrame();
 	UpdateModel();
 	ComposeFrame();
 	gfx.EndFrame();
@@ -74,13 +74,13 @@ void Game::UpdateModel()
 {
 	float dt = ft.Mark();
 	paddle.Update(wnd.kbd, dt);
-	
+
 	bool collisionHappend = false;
 	float curColDisSq;
 	int curColIndex;
 
 	for (int i = 0; i < brickCount; i++) {
-		if (bricks[i].CheckBallCollision(ball)){
+		if (bricks[i].CheckBallCollision(ball)) {
 			const float newColDisSq = (ball.GetPos() - bricks[i].getCenter()).GetLengthSq();
 			if (collisionHappend)
 			{
@@ -89,7 +89,7 @@ void Game::UpdateModel()
 					curColIndex = i;
 				}
 			}
-			else 
+			else
 			{
 				curColDisSq = newColDisSq;
 				curColIndex = i;
@@ -98,21 +98,23 @@ void Game::UpdateModel()
 		}
 	}
 	if (collisionHappend) {
-			bricks[curColIndex].ExecuteBallCollision(ball);
-			soundBrick.Play();
+		paddle.ResetCooldown();
+		bricks[curColIndex].ExecuteBallCollision(ball);
+		soundBrick.Play();
 	}
 	ball.Update(dt);
 	paddle.DoWallCollision(walls);
 
 	if (paddle.DoBallCollision(ball)) {
-			soundPad.Play();
-		}
+		soundPad.Play();
+	}
 	if (ball.DoWallCollision(walls)) {
-			soundBrick.Play();
-		}
-	
-	
-	
+		paddle.ResetCooldown();
+		soundBrick.Play();
+	}
+
+
+
 
 }
 
@@ -124,6 +126,6 @@ void Game::ComposeFrame()
 	{
 		b.Draw(gfx);
 	}
-	
-	
+
+
 }
