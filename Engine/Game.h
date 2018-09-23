@@ -56,7 +56,9 @@ private:
 	float brickWidth = 40.0f; 
 	int const static brickRowCount = 5;
 	int const static brickColumnCount = 19;
-	Brick bricks[brickRowCount*brickColumnCount];
+	int const static brickCount = brickRowCount * brickColumnCount;
+	Brick bricks[brickCount];
+
 	Brick testBrick;
 	RectF walls;
 	Sound soundPad;

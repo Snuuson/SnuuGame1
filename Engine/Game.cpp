@@ -67,9 +67,31 @@ void Game::UpdateModel()
 	float dt = ft.Mark();
 	paddle.Update(wnd.kbd, dt);
 	
-	for each (Brick& brick in bricks)
-	{
-		brick.DoBallCollision(ball);
+	bool collisionHappend = false;
+	float curColDisSq;
+	int curColIndex;
+
+	for (int i = 0; i < brickCount; i++) {
+		if (bricks[i].CheckBallCollision(ball)){
+			const float newColDisSq = (ball.GetPos() - bricks[i].getCenter()).GetLengthSq();
+			if (collisionHappend)
+			{
+				if (curColDisSq < newColDisSq) {
+					curColDisSq = newColDisSq;
+					curColIndex = i;
+				}
+			}
+			else 
+			{
+				curColDisSq = newColDisSq;
+				curColIndex = i;
+				collisionHappend = true;
+			}
+		}
+	}
+	if (collisionHappend) {
+			bricks[curColIndex].ExecuteBallCollision(ball);
+			soundBrick.Play();
 	}
 	ball.Update(dt);
 	paddle.DoWallCollision(walls);

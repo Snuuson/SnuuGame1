@@ -14,6 +14,7 @@ public:
 	float right;
 	float top;
 	float bottom;
+	Vec2 getCenter() const;
 	~RectF();
 
 private:
